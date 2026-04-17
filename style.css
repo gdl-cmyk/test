@@ -1,63 +1,125 @@
 :root {
-    --bg: #f8fafc;
-    --card-bg: #ffffff;
+    --bg: #f0f4f8;
+    --card-bg: rgba(255, 255, 255, 0.6);
     --text-main: #1e293b;
     --text-muted: #64748b;
-    --border: #e2e8f0;
+    --border: rgba(255, 255, 255, 0.4);
     --accent: #2563eb;
-    --input-bg: #ffffff;
+    --input-bg: rgba(255, 255, 255, 0.5);
+    --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
 }
 
-/* Темна тема */
 [data-theme="dark"] {
     --bg: #0f172a;
-    --card-bg: #1e293b;
+    --card-bg: rgba(30, 41, 59, 0.6);
     --text-main: #f1f5f9;
     --text-muted: #94a3b8;
-    --border: #334155;
+    --border: rgba(255, 255, 255, 0.08);
     --accent: #3b82f6;
-    --input-bg: #1e293b;
+    --input-bg: rgba(15, 23, 42, 0.4);
+    --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
 }
 
 body {
     background-color: var(--bg);
     color: var(--text-main);
-    transition: background 0.3s, color 0.3s;
-    font-family: -apple-system, system-ui, sans-serif;
+    transition: background 0.5s ease, color 0.3s;
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
     margin: 0;
     display: flex;
     justify-content: center;
     padding: 20px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
 }
 
+/* Анімований живий фон */
+body::before, body::after {
+    content: "";
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    z-index: -1;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.12) 0%, transparent 50%);
+    animation: orbit 25s linear infinite;
+}
+
+body::after {
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 40%);
+    animation: orbit 35s linear infinite reverse;
+    top: -20%;
+    left: -20%;
+}
+
+@keyframes orbit {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Кнопка теми */
 .theme-btn {
     position: fixed;
     top: 20px;
     right: 20px;
     background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--border);
     padding: 12px;
     border-radius: 50%;
     cursor: pointer;
     font-size: 1.2rem;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: var(--shadow);
     z-index: 1000;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.container { width: 100%; max-width: 500px; margin-top: 50px; }
-header h1 { font-size: 2rem; font-weight: 800; margin-bottom: 5px; }
-header span { color: var(--accent); }
-header p { color: var(--text-muted); margin-bottom: 30px; }
+.theme-btn:hover {
+    transform: scale(1.1) rotate(15deg);
+}
 
-.search-box { position: relative; }
-.input-wrapper { display: flex; gap: 10px; }
+.container { 
+    width: 100%; 
+    max-width: 480px; 
+    margin-top: 60px;
+    animation: fadeIn 0.8s ease-out;
+}
+
+header h1 { 
+    font-size: 2.2rem; 
+    font-weight: 900; 
+    margin-bottom: 5px; 
+    letter-spacing: -1px;
+}
+
+header span { 
+    background: linear-gradient(90deg, var(--accent), #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Поле пошуку */
+.input-wrapper { 
+    display: flex; 
+    gap: 12px;
+    background: var(--card-bg);
+    padding: 8px;
+    border-radius: 18px;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+}
 
 input {
     flex: 1;
-    padding: 16px;
+    padding: 14px 18px;
     border-radius: 12px;
-    border: 2px solid var(--border);
-    background: var(--input-bg);
+    border: none;
+    background: transparent;
     color: var(--text-main);
     font-size: 1rem;
     outline: none;
@@ -67,51 +129,114 @@ button#searchBtn {
     background: var(--accent);
     color: white;
     border: none;
-    padding: 0 20px;
+    padding: 0 24px;
     border-radius: 12px;
     font-weight: 700;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
+button#searchBtn:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+}
+
+/* Список підказок */
 .results-list {
     position: absolute;
     width: 100%;
     background: var(--card-bg);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    margin-top: 5px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    border-radius: 18px;
+    margin-top: 10px;
+    box-shadow: var(--shadow);
     z-index: 100;
     overflow: hidden;
+    animation: slideDown 0.3s ease-out;
 }
 
 .result-item {
-    padding: 14px;
+    padding: 14px 20px;
     border-bottom: 1px solid var(--border);
     cursor: pointer;
-    transition: background 0.2s;
+    transition: all 0.2s;
 }
-.result-item:hover { background: rgba(0,0,0,0.05); }
 
+.result-item:hover { 
+    background: rgba(37, 99, 235, 0.1);
+    padding-left: 28px;
+}
+
+/* Картка скла */
 .glass-card {
     background: var(--card-bg);
-    padding: 25px;
-    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 30px;
+    border-radius: 28px;
     border: 1px solid var(--border);
-    margin-top: 25px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-top: 30px;
+    box-shadow: var(--shadow);
+    animation: cardAppearing 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .compat-badge {
     display: inline-block;
-    background: var(--accent);
-    color: white;
-    padding: 6px 12px;
-    border-radius: 8px;
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--accent);
+    padding: 7px 15px;
+    border-radius: 12px;
     margin: 4px;
-    font-size: 0.9rem;
-    font-weight: 600;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border: 1px solid rgba(37, 99, 235, 0.15);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.error-text { color: #ef4444; margin-top: 10px; font-weight: 500; }
+.compat-badge:hover {
+    background: var(--accent);
+    color: white;
+    transform: translateY(-3px) scale(1.05);
+}
+
+/* Скролбар */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 10px;
+}
+
+/* Анімації */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cardAppearing {
+    from { opacity: 0; transform: scale(0.92) translateY(30px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.error-text { 
+    color: #ef4444; 
+    margin-top: 15px; 
+    font-weight: 600; 
+    padding-left: 10px;
+}
+
 .hidden { display: none !important; }
