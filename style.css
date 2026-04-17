@@ -1,0 +1,117 @@
+:root {
+    --bg: #f8fafc;
+    --card-bg: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --accent: #2563eb;
+    --input-bg: #ffffff;
+}
+
+/* Темна тема */
+[data-theme="dark"] {
+    --bg: #0f172a;
+    --card-bg: #1e293b;
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --border: #334155;
+    --accent: #3b82f6;
+    --input-bg: #1e293b;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text-main);
+    transition: background 0.3s, color 0.3s;
+    font-family: -apple-system, system-ui, sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.theme-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.container { width: 100%; max-width: 500px; margin-top: 50px; }
+header h1 { font-size: 2rem; font-weight: 800; margin-bottom: 5px; }
+header span { color: var(--accent); }
+header p { color: var(--text-muted); margin-bottom: 30px; }
+
+.search-box { position: relative; }
+.input-wrapper { display: flex; gap: 10px; }
+
+input {
+    flex: 1;
+    padding: 16px;
+    border-radius: 12px;
+    border: 2px solid var(--border);
+    background: var(--input-bg);
+    color: var(--text-main);
+    font-size: 1rem;
+    outline: none;
+}
+
+button#searchBtn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 0 20px;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.results-list {
+    position: absolute;
+    width: 100%;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-top: 5px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    z-index: 100;
+    overflow: hidden;
+}
+
+.result-item {
+    padding: 14px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.result-item:hover { background: rgba(0,0,0,0.05); }
+
+.glass-card {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    margin-top: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.compat-badge {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    margin: 4px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.error-text { color: #ef4444; margin-top: 10px; font-weight: 500; }
+.hidden { display: none !important; }

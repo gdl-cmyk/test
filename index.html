@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acclab Glass Finder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button id="themeToggle" class="theme-btn">🌙</button>
+
+    <div class="container">
+        <header>
+            <h1>SAMSUNG <span>A,M,S-Series</span></h1>
+            <p>Сумісність Acclab Full Glue</p>
+        </header>
+
+        <div class="search-box">
+            <div class="input-wrapper">
+                <input type="text" id="searchInput" placeholder="Введіть модель (напр. A54)..." autocomplete="off">
+                <button id="searchBtn">Пошук</button>
+            </div>
+            <div id="results" class="results-list hidden"></div>
+            <p id="errorMsg" class="error-text hidden">Модель не знайдено.</p>
+        </div>
+
+        <div id="glassDetails" class="glass-card hidden"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
