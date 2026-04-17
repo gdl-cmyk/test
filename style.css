@@ -165,3 +165,70 @@ button#searchBtn {
 
 .error-text { color: #ef4444; margin-top: 15px; text-align: center; }
 .hidden { display: none !important; }
+/* ОПТИМІЗАЦІЯ ПІД МОБІЛЬНІ ПРИСТРОЇ */
+@media (max-width: 480px) {
+    .container {
+        width: 92%;
+        margin: 60px auto 20px auto; /* Менший відступ зверху */
+    }
+
+    header h1 {
+        font-size: 1.8rem; /* Менший заголовок, щоб не переносився криво */
+    }
+
+    .input-wrapper {
+        padding: 6px; /* Компактніший ввід */
+        gap: 8px;
+        border-radius: 14px;
+    }
+
+    input {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+
+    button#searchBtn {
+        padding: 0 16px;
+        font-size: 0.9rem;
+        border-radius: 10px;
+    }
+
+    .glass-card {
+        padding: 20px; /* Менше внутрішніх відступів */
+        margin-top: 20px;
+        border-radius: 20px;
+    }
+
+    .results-list {
+        max-height: 180px; /* Щоб список не перекривав весь екран */
+    }
+
+    .result-item {
+        padding: 12px 16px;
+        font-size: 0.9rem;
+    }
+
+    /* Оптимізація продуктивності: на слабких мобілках розмиття може лагати. 
+       Ми трохи зменшуємо його радіус для плавності скролу */
+    :root {
+        --blur-val: blur(8px); 
+    }
+    
+    .theme-btn {
+        top: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* Фікс для дуже маленьких екранів (типу iPhone SE) */
+@media (max-width: 350px) {
+    header h1 {
+        font-size: 1.5rem;
+    }
+    
+    button#searchBtn {
+        padding: 0 10px;
+    }
+}
