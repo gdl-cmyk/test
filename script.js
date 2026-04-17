@@ -17,7 +17,7 @@ const glassData = [
     {
         title: "Захисне скло Acclab Full Glue",
         models: ["Samsung A55 5G", "Samsung A35 5G"],
-        info: "Лінійка 2024 року. Прямі краї, новий формат вирізу під динамік."
+        info: "Лінійка 2024 року. Прямі краї, новий формат вирізу под динамік."
     },
     {
         title: "Захисне скло Acclab Full Glue",
@@ -64,6 +64,10 @@ function showResult(data, modelName) {
     errorMsg.classList.add('hidden');
     searchInput.value = modelName;
     
+    // Скидаємо анімацію картки
+    glassCard.classList.remove('animate-card');
+    void glassCard.offsetWidth; // Force reflow для рестарту анімації
+    
     glassCard.innerHTML = `
         <h2>${data.title}</h2>
         <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px; background: rgba(0,0,0,0.05); padding: 10px; border-radius: 8px;">
@@ -75,6 +79,7 @@ function showResult(data, modelName) {
         </div>
     `;
     glassCard.classList.remove('hidden');
+    glassCard.classList.add('animate-card');
 }
 
 // ФУНКЦІЯ ПОШУКУ
